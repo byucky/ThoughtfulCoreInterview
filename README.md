@@ -1,56 +1,77 @@
-# Package Sorting Solution
-
-A Python solution for Thoughtful's robotic automation factory that dispatches packages to the correct stack based on their volume, dimensions, and mass.
-
-## Problem Description
-
-The robotic arm needs to sort packages into three different stacks:
-
-- **STANDARD**: Standard packages that can be handled normally (not bulky and not heavy)
-- **SPECIAL**: Packages that require special handling (either heavy or bulky, but not both)
-- **REJECTED**: Packages that are both heavy and bulky and must be rejected
-
-### Classification Rules
-
-- A package is **bulky** if:
-  - Its volume (Width × Height × Length) is greater than or equal to 1,000,000 cm³, OR
-  - Any of its dimensions (width, height, or length) is greater than or equal to 150 cm
-
-- A package is **heavy** if:
-  - Its mass is greater than or equal to 20 kg
-
-## Installation
-
-No external dependencies are required. This solution uses only Python's standard library.
-
 **Requirements:**
 - Python 3.6 or higher
 
-## Usage
+## Quick Start
 
-### Basic Usage
+### Using the Main Application
 
-```python
-from package_sorter import sort
+The easiest way to use the package sorter is through the main application, which provides both interactive and command-line interfaces.
 
-# Standard package (small, light)
-result = sort(10, 10, 10, 5)
-print(result)  # Output: "STANDARD"
+#### Interactive Mode
 
-# Special package (bulky but not heavy)
-result = sort(150, 10, 10, 5)
-print(result)  # Output: "SPECIAL"
+Run the main script without arguments to enter interactive mode:
 
-# Special package (heavy but not bulky)
-result = sort(10, 10, 10, 20)
-print(result)  # Output: "SPECIAL"
-
-# Rejected package (both heavy and bulky)
-result = sort(150, 10, 10, 20)
-print(result)  # Output: "REJECTED"
+```bash
+python main.py
 ```
 
-### Function Signature
+You will be prompted to enter:
+- Width (cm)
+- Height (cm)
+- Length (cm)
+- Mass (kg)
+
+The application will then display the package classification along with detailed information about why it was classified that way.
+
+#### Command Line Mode
+
+You can also provide all arguments directly via command line:
+
+```bash
+python main.py <width> <height> <length> <mass>
+```
+
+**Examples:**
+
+```bash
+# Standard package
+python main.py 10 10 10 5
+
+# Special package (bulky)
+python main.py 150 10 10 5
+
+# Special package (heavy)
+python main.py 10 10 10 20
+
+# Rejected package
+python main.py 150 10 10 20
+```
+
+#### Help
+
+To see usage instructions:
+
+```bash
+python main.py --help
+```
+
+## Running Tests
+
+The solution includes a comprehensive test suite covering all classification categories and edge cases.
+
+### Using unittest (Python standard library)
+
+```bash
+python -m unittest test_package_sorter.py
+```
+
+Or simply:
+
+```bash
+python test_package_sorter.py
+```
+
+## Function Signature
 
 ```python
 def sort(width, height, length, mass) -> str
@@ -97,22 +118,6 @@ sort(10, 10, 10, 20)  # Returns "SPECIAL"
 sort(150, 100, 100, 25)  # Returns "REJECTED"
 ```
 
-## Running Tests
-
-The solution includes a comprehensive test suite covering all classification categories and edge cases.
-
-### Using unittest (Python standard library)
-
-```bash
-python -m unittest test_package_sorter.py
-```
-
-Or simply:
-
-```bash
-python test_package_sorter.py
-```
-
 ### Expected Test Output
 
 ```
@@ -156,5 +161,11 @@ The solution implements a straightforward classification algorithm:
 ## Files
 
 - `package_sorter.py`: Main implementation with the `sort()` function
+- `main.py`: Interactive command-line application for sorting packages
 - `test_package_sorter.py`: Comprehensive test suite
 - `README.md`: This documentation file
+
+## Questions
+
+- How should the pysically impossible edge cases be handled? 'REJECTED' | 'STANDARD' (e.g. sort(0,0,1,0) or even sort(1000000,1000000,1000000, 1) )
+- 
