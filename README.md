@@ -118,54 +118,6 @@ sort(10, 10, 10, 20)  # Returns "SPECIAL"
 sort(150, 100, 100, 25)  # Returns "REJECTED"
 ```
 
-### Expected Test Output
-
-```
-...............
-----------------------------------------------------------------------
-Ran 15 tests in 0.001s
-
-OK
-```
-
-## Test Coverage
-
-The test suite includes:
-
-- **Standard packages**: Various sizes and weights that don't meet bulky or heavy criteria
-- **Special packages**: Packages that are either bulky or heavy (but not both)
-- **Rejected packages**: Packages that are both heavy and bulky
-- **Boundary conditions**: Exactly at thresholds (1,000,000 cm³, 150 cm, 20 kg)
-- **Edge cases**: Very small/large packages, floating point values, zero dimensions
-
-## Code Quality
-
-- Clean, readable code with clear variable names
-- Comprehensive docstrings following Google style
-- Type hints in docstrings
-- Well-organized test cases with descriptive names
-- Handles edge cases appropriately
-
-## Solution Approach
-
-The solution implements a straightforward classification algorithm:
-
-1. Calculate the package volume (width × height × length)
-2. Determine if the package is bulky (volume ≥ 1,000,000 cm³ OR any dimension ≥ 150 cm)
-3. Determine if the package is heavy (mass ≥ 20 kg)
-4. Classify based on the combination:
-   - Both heavy and bulky → "REJECTED"
-   - Either heavy or bulky → "SPECIAL"
-   - Neither heavy nor bulky → "STANDARD"
-
-## Files
-
-- `package_sorter.py`: Main implementation with the `sort()` function
-- `main.py`: Interactive command-line application for sorting packages
-- `test_package_sorter.py`: Comprehensive test suite
-- `README.md`: This documentation file
-
 ## Questions
 
 - How should the pysically impossible edge cases be handled? 'REJECTED' | 'STANDARD' (e.g. sort(0,0,1,0) or even sort(1000000,1000000,1000000, 1) )
-- 
