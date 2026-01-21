@@ -5,8 +5,15 @@ This module provides functionality to sort packages into appropriate stacks
 based on their dimensions and mass.
 """
 
+from typing import Union, Literal
 
-def sort(width, height, length, mass):
+
+def sort(
+    width: Union[float, int],
+    height: Union[float, int],
+    length: Union[float, int],
+    mass: Union[float, int]
+) -> Literal["STANDARD", "SPECIAL", "REJECTED"]:
     """
     Sort a package into the appropriate stack based on its dimensions and mass.
     
